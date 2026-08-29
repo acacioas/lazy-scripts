@@ -18,6 +18,8 @@ Got a bootleg recording (a whole concert or DJ set as one big audio file) and wa
 brew install ffmpeg
 ```
 
+> Tested on macOS only.
+
 ## Usage
 
 ```

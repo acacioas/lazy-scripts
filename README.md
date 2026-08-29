@@ -2,6 +2,8 @@
 
 Do you know when you need to do something that will take a lot of time and you are too lazy to do?
 
+> **Note:** these scripts are written and tested on macOS. They may work elsewhere, but paths, dependencies (e.g. `brew install ...`), and behavior are only verified on macOS.
+
 ## Scripts
 
 | Script | Description |

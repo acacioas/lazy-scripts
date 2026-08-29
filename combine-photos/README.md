@@ -31,6 +31,8 @@ Images are read from the input directory (non-recursive), sorted in natural orde
 pip install Pillow
 ```
 
+> Tested on macOS only.
+
 ## Usage
 
 ```
