@@ -56,8 +56,11 @@ def measure_loudness(input_file: Path, target_i: float, true_peak: float, lra: f
     return json.loads(match.group(0))
 
 
-def normalize_file(input_file: Path, output_file: Path, target_i: float, true_peak: float, lra: float):
+def normalize_file(input_file: Path, output_file: Path, target_i: float, true_peak: float, lra: float, progress: str):
+    print(f"{progress} {input_file.name}: measuring loudness (pass 1/2)...", flush=True)
     stats = measure_loudness(input_file, target_i, true_peak, lra)
+
+    print(f"{progress} {input_file.name}: applying normalization (pass 2/2)...", flush=True)
     filt = (
         f"loudnorm=I={target_i}:TP={true_peak}:LRA={lra}:"
         f"measured_I={stats['input_i']}:measured_TP={stats['input_tp']}:"
@@ -104,14 +107,16 @@ def main():
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
+    print(f"Normalizing {len(files)} file(s) to {args.target_lufs:.1f} LUFS...")
     failures = []
-    for f in files:
+    for i, f in enumerate(files, start=1):
         output_file = args.output_dir / f.name
+        progress = f"[{i}/{len(files)}]"
         try:
-            before = normalize_file(f, output_file, args.target_lufs, args.true_peak, args.lra)
-            print(f"Normalized {f.name} ({before:.1f} LUFS -> {args.target_lufs:.1f} LUFS)")
+            before = normalize_file(f, output_file, args.target_lufs, args.true_peak, args.lra, progress)
+            print(f"{progress} {f.name}: done ({before:.1f} LUFS -> {args.target_lufs:.1f} LUFS)")
         except RuntimeError as e:
-            print(f"FAILED {f.name}: {e}", file=sys.stderr)
+            print(f"{progress} {f.name}: FAILED: {e}", file=sys.stderr)
             failures.append(f.name)
 
     print(f"Done: {len(files) - len(failures)}/{len(files)} file(s) written to '{args.output_dir}'.")

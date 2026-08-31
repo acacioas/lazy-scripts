@@ -39,7 +39,7 @@ def test_normalize_file_hits_target_and_keeps_metadata(tmp_path: Path):
         check=True,
     )
 
-    before = normalize_volume.normalize_file(input_file, output_file, target_i=-14.0, true_peak=-1.0, lra=11.0)
+    before = normalize_volume.normalize_file(input_file, output_file, target_i=-14.0, true_peak=-1.0, lra=11.0, progress="[1/1]")
     assert before < -20  # confirms the input really was quiet
 
     after_stats = normalize_volume.measure_loudness(output_file, target_i=-14.0, true_peak=-1.0, lra=11.0)
