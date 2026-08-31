@@ -10,6 +10,7 @@ Do you know when you need to do something that will take a lot of time and you a
 |---|---|
 | [combine-photos](combine-photos/) | Pairs up photos and lays them side by side onto a single 10x15cm canvas, so photo kiosks print two smaller photos for the price of one. |
 | [cut-bootleg](cut-bootleg/) | Cuts a big bootleg/concert audio file into individual song files using a tracklist text file, tagging each with title/artist/album/track number. |
+| [normalize-volume](normalize-volume/) | Loudness-normalizes a folder of songs (mp3, m4a, aac, flac, wav, ...) to a consistent volume, re-encoding at the best quality per format and preserving metadata/cover art. |
 
 ## License
 
